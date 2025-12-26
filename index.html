@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <title>Өспүрүмдөрдү каттоо</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #1e2d3b;
+            color: #a9d6e5;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 32px;
+        }
+
+        .container {
+            width: 800px;
+            margin: 30px auto;
+        }
+
+        .form {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            padding-top: 8px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            background: #375a7f;
+            color: white;
+            border: none;
+            outline: none;
+            border-radius: 6px;
+        }
+
+        input:focus {
+            box-shadow: 0 0 0 2px #58a6ff;
+        }
+
+        button {
+            grid-column: 2;
+            width: 180px;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            background: #58a6ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #346fc2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #2e4053;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: center;
+        }
+
+        th {
+            background: #1f4068;
+            font-size: 18px;
+        }
+
+        tr:nth-child(even) {
+            background: #263544;
+        }
+
+        tr:hover {
+            background: #58a6ff;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Өспүрүмдөрдү каттоо системасы</h1>
+
+<div class="container">
+
+    <div class="form">
+        <label>Аты-жөнү:</label>
+        <input type="text" id="name">
+
+        <label>Жашы:</label>
+        <input type="text" id="age">
+
+        <label>Статусу:</label>
+        <input type="text" id="status">
+
+        <button onclick="addTeen()">Кошуу</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Аты-жөнү</th>
+                <th>Жашы</th>
+                <th>Статусу</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+function addTeen() {
+    const name = document.getElementById("name").value.trim();
+    const age = document.getElementById("age").value.trim();
+    const status = document.getElementById("status").value.trim();
+
+    if (!name || !age || !status) {
+        alert("Бардык талааларды толтуруңуз!");
+        return;
+    }
+
+    if (isNaN(age)) {
+        alert("Жашы сан менен жазылышы керек!");
+        return;
+    }
+
+    if (parseInt(age) < 18) {
+        alert("Жашы 18ден кем болбошу керек!");
+        return;
+    }
+
+    const table = document.getElementById("tableBody");
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>${name}</td>
+        <td>${age}</td>
+        <td>${status}</td>
+    `;
+
+    table.appendChild(row);
+
+    document.getElementById("name").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("status").value = "";
+}
+</script>
+
+</body>
+</html> 
